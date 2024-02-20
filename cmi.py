@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser(description="Converts PNG files from or to CMI 
    formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("src", help="Source file to convert", type=str)
 parser.add_argument("--output", help="Output path (with filename), makes a default name in the directory of the original file if not provided", required=False, type=str)
-parser.add_argument("--size", help="Determines the max resolution of a outputted cmi file. Will determine a size from the image if none is given. (1 = 1020x1020 max, 2 = 64516x64516 max, 3 = 16387064x16387064 max. Image will be automatically resized if it doesn't fit the maximum size)", choices=[1, 2], required=False, type=int)
+parser.add_argument("--size", help="Determines the max resolution of a outputted cmi file. Will determine a size from the image if none is given. (1 = 1020x1020 max, 2 = 64516x64516 max, 3 = 16387064x16387064 max. Image will be automatically resized if it doesn't fit the maximum size)", choices=[1, 2, 3], required=False, type=int)
 
 args = parser.parse_args()
 
