@@ -52,7 +52,8 @@ It's noticeably smaller as well. Lets move on to the last section that explains 
 I adopted most of the ways a PNG file works because of [this video](https://www.youtube.com/watch?v=-Rdo8KAHgoE) which inspired me to make this image format. Anyways, the file is encoded and decoded in [hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal), split into 2 chunks by a end-of-chunk byte of `0x00` *(this is why there are 255 possible colors to decode and not 256)*. The first chunk contains the [file signature](https://en.wikipedia.org/wiki/File_signature) *(a form of verification)* the SizeType *(explained before)*, the width, and the height of the image. The next chunk is the image data, it contains the color index of every pixel *(list of possible colors is in **storage.py**)* which extends to the end of the file. 
 Here is a visual example of `colorscale.cmi` *(which I converted last)* with labels for each chunk & sub-chunk:
 
-![visual example depicting each chunk & sub-chunk](https://i.postimg.cc/gjw15B08/Untitled.png) -- will fix image soon <br>
+<img src="https://i.postimg.cc/FRXM7K6f/Untitled.png" alt="visual representation of the description" width="750"> 
+
 *(please note that the length of the width & height sub-chunk can vary dependent on the SizeType)*
 
 ## Plans for the Future
