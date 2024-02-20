@@ -9,25 +9,24 @@ from storage import colors
 parser = argparse.ArgumentParser(description="Converts PNG files from or to CMI files.",
    formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("src", help="Source file to convert", type=str)
-parser.add_argument("contype", help="Type of conversion (cmi = to cmi, png = to png)", choices=['cmi', 'png'], type=str)
 parser.add_argument("--output", help="Output path (with filename), makes a default name in the directory of the original file if not provided", required=False, type=str)
 parser.add_argument("--size", help="Determines the max resolution of a outputted cmi file. Will determine a size from the image if none is given. (1 = 1020x1020 max, 2 = 64516x64516 max, 3 = 16387064x16387064 max. Image will be automatically resized if it doesn't fit the maximum size)", choices=[1, 2], required=False, type=int)
 
 args = parser.parse_args()
 
+contype = 'cmi'
+if os.path.splitext(os.path.basename(args.src))[1] == '.cmi':
+  contype = 'png'
+
 # making sure all arguments are valid
 
-print(args)
 if not os.path.exists(args.src):
-  raise SyntaxError('Argument "src" is not a file.')
+  raise SyntaxError('File provided is not a file.')
 
-if not os.path.splitext(args.src)[1] == '.png' and args.contype == 'cmi':
-  raise SyntaxError('''Argument "src" is not a png file, so it can't be converted to a cmi file.''')
+if not (os.path.splitext(os.path.basename(args.src))[1] == '.png' or os.path.splitext(os.path.basename(args.src))[1] == '.cmi'):
+  raise SyntaxError('File must me a CMI or a PNG file.')
 
-if not os.path.splitext(args.src)[1] == '.cmi' and args.contype == 'png':
-  raise SyntaxError('''Argument "src" is not a cmi file, so it can't be converted to a png file.''')
-
-if args.contype == 'png' and args.size is not None:
+if contype == 'png' and args.size is not None:
   raise SyntaxError('Argument "size" is not required when converting to png.')
 
 # progress bar stuff
@@ -49,9 +48,8 @@ def closest_color(color):
   return smallest_distance 
 
 # actual conversion
-# convert = input('What are you using this for?\n  [1] Converting PNG to CMI\n  [2] Converting CMI to PNG\n\nType your answer here: ')
 
-if args.contype == 'cmi':
+if contype == 'cmi':
   print('Initializing')
   imgName = os.path.splitext(os.path.basename(args.src))[0]
   originalImage = Image.open(args.src)
@@ -113,7 +111,7 @@ if args.contype == 'cmi':
     image.write(data)
     print(f'\nFinshed, wrote to {filename}')
       
-elif args.contype == 'png':
+elif contype == 'png':
   imgName = os.path.splitext(os.path.basename(args.src))[0]
   data = b''
 
