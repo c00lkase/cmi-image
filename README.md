@@ -39,12 +39,12 @@ Its obviously not the best image format, but it works. Now lets add more argumen
 I will start with `--output` because it's easy to understand, it lets you pick a filename and location, an example is <br>`cmi.py colorscale.png --output=C:\why-here.png`
 *(be sure to include the directory, filename, and the file extension for this)*
 
-Now, a more fun argument is size, it modifies `0x00000003` in the file which determines the maximum size of said image *(i explain more on how the format works later)* For example, lets use the color scale image we've been using and set it's size to 1.
+Secondly, `--help` and `-h`, it will explain all position and optional requirements.
+
+Now, a more fun argument is `--size`, it modifies `0x00000003` in the file which determines the maximum size of said image *(i explain more on how the format works later)* For example, lets use the color scale image we've been using and set it's size to 1.
 <br>`cmi.py colorscale.png --size=1`<br>
 We get a cmi file, noticeably smaller than the last one, now lets convert it to a png.
 <br>`cmi.py colorscale.cmi`<br>
-
-Lastly, `--help` and `-h`, it will explain all position and optional requirements.
 
 <img src="https://i.postimg.cc/wxPVFBY1/rainbowres-converted.png" alt="colorscale-converted.png" width="350"> 
 
